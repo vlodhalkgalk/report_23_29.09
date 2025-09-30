@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Итоговый отчет 23.09 - 29.09</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        /* Убираем все отступы */
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        /* Убираем отступы Google Sites */
+        div[data-id], .goog-ws-editor-paragraph-element, .site-header, .sites-canvas-main, .sites-canvas {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #0f172a;
+            background: #0f0f23;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+        }
+        
+        .report-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 32px 64px rgba(0, 0, 0, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            overflow: hidden;
+            position: relative;
+            margin: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+        
+        .header-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
+        }
+        
+        .content {
+            padding: 48px 40px;
+        }
+        
+        .block {
+            margin-bottom: 56px;
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+        }
+        
+        .block:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Комьюнити-блок - средний фиолетовый */
+        .community-block {
+            background: linear-gradient(135deg, #faf8ff 0%, #f3f0ff 100%);
+            border-left: 6px solid #8b5cf6;
+        }
+        
+        /* Инвест-блок - светло-фиолетовый */
+        .invest-block {
+            background: linear-gradient(135deg, #f8faff 0%, #f1f5fe 100%);
+            border-left: 6px solid #667eea;
+        }
+        
+        /* Финансовый блок - насыщенный фиолетовый */
+        .finance-block {
+            background: linear-gradient(135deg, #fdf9ff 0%, #f5f0ff 100%);
+            border-left: 6px solid #a855f7;
+        }
+        
+        .block-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        
+        .block-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        .invest-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .community-icon {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+        }
+        
+        .finance-icon {
+            background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%);
+        }
+        
+        .block-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.02em;
+        }
+        
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #334155;
+            margin: 32px 0 20px 0;
+            padding-left: 16px;
+            border-left: 4px solid #8b5cf6;
+        }
+        
+        .invest-section-title {
+            border-left-color: #667eea;
+        }
+        
+        .finance-section-title {
+            border-left-color: #a855f7;
+        }
+        
+        .project {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 
+                0 4px 6px rgba(0, 0, 0, 0.03),
+                0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .invest-card::before {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .finance-card::before {
+            background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%);
+        }
+        
+        .project:hover {
+            transform: translateY(-4px);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.08),
+                0 8px 16px rgba(0, 0, 0, 0.06);
+            border-color: #cbd5e1;
+        }
+        
+        .project:hover::before {
+            transform: scaleY(1);
+        }
+        
+        .project-header {
+            margin-bottom: 16px;
+        }
+        
+        .project-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: -0.02em;
+        }
+        
+        .project-details {
+            margin-left: 0;
+        }
+        
+        .project-details p {
+            margin-bottom: 8px;
+            color: #475569;
+            font-weight: 400;
+        }
+        
+        .project-details ul {
+            margin: 12px 0;
+            padding-left: 20px;
+        }
+        
+        .project-details li {
+            margin-bottom: 6px;
+            color: #475569;
+        }
+        
+        .achievements {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px 0;
+            border-left: 4px solid #10b981;
+        }
+        
+        .achievements-title {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+        
+        .warning-section {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 24px;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .checkmark {
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .crossmark {
+            color: #ef4444;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .bullet {
+            color: #8b5cf6;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .invest-bullet {
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .finance-bullet {
+            color: #a855f7;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .warning-bullet {
+            color: #f59e0b;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .metrics {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+        
+        .metric {
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .metric-primary {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+        }
+        
+        .metric-secondary {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fcd34d;
+        }
+        
+        .metric-info {
+            background: #dbeafe;
+            color: #1d4ed8;
+            border: 1px solid #93c5fd;
+        }
+        
+        .stat-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px;
+            margin: 12px 0;
+            border-left: 4px solid #8b5cf6;
+        }
+        
+        .invest-stat-box {
+            border-left-color: #667eea;
+        }
+        
+        .finance-stat-box {
+            border-left-color: #a855f7;
+        }
+        
+        .finance-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .finance-item {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+        
+        .finance-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+        }
+        
+        .finance-item h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+        
+        .amount-large {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #a855f7;
+            margin: 8px 0;
+        }
+        
+        .amount-warning {
+            color: #f59e0b;
+        }
+        
+        .amount-danger {
+            color: #ef4444;
+        }
+
+        .amount-success {
+            color: #10b981;
+        }
+        
+        .negative-section {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 24px;
+            border-left: 4px solid #ef4444;
+        }
+        
+        .positive-section {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 24px;
+            border-left: 4px solid #10b981;
+        }
+        
+        .mobile-short {
+            display: none;
+        }
+        
+        .desktop-full {
+            display: inline;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0;
+                width: 100vw;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .header-content {
+                padding: 32px 24px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .block {
+                padding: 20px;
+                margin-bottom: 40px;
+            }
+            
+            .block-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .block-icon {
+                width: 48px;
+                height: 48px;
+                margin-right: 0;
+                margin-bottom: 8px;
+            }
+            
+            .metrics {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .metric {
+                white-space: normal;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+                font-size: 0.8rem;
+                padding: 8px 12px;
+                text-align: center;
+            }
+
+            .report-card {
+                margin: 10px;
+            }
+            
+            .finance-summary {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-details p {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+            }
+            
+            .amount-large {
+                font-size: 1.5rem;
+                word-wrap: break-word;
+            }
+            
+            .mobile-short {
+                display: inline;
+            }
+            
+            .desktop-full {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <div class="container">
+        <div class="report-card">
+            <div class="header">
+                <div class="header-content">
+                    <h1>Итоговый отчет</h1>
+                    <div class="header-subtitle">23.09 - 29.09</div>
+                </div>
+            </div>
+            
+            <div class="content">
+                <!-- Комьюнити блок -->
+                <div class="block community-block">
+                    <div class="block-header">
+                        <div class="block-icon community-icon">
+                            <svg width="28" height="28" fill="white" viewBox="0 0 24 24">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <div class="block-title">Сообщество</div>
+                    </div>
+
+                    <div class="section-title">Мероприятия октября</div>
+                    <div class="project">
+                        <div class="project-details">
+                            <p><span class="bullet">•</span>3, 17, 24 — падел</p>
+                            <p><span class="bullet">•</span>4, 18 — инвест-разборы</p>
+                            <p><span class="bullet">•</span>09–12 — инвест weekend Тюмень</p>
+                            <p><span class="bullet">•</span>Знакомство с СД — дата и участник уточняются</p>
+                            <p><span class="bullet">•</span>Инвест-ужин — дата и участник уточняются</p>
+                        </div>
+                    </div>
+
+                    <div class="section-title">PDP</div>
+                    <div class="project">
+                        <div class="project-details">
+                            <p><span class="crossmark">✖</span>Выдано: 0 PDP</p>
+                            <p><span class="bullet">•</span>В процессе: 3 PDP</p>
+                            <p><span class="bullet">•</span>Проведены встречи с Максимом Мартюшевым, Макиенко</p>
+                            <p><span class="checkmark">✔</span>Доделан PDP light и подготовлено предложение по новой структуре PDP</p>
+                        </div>
+                    </div>
+
+                    <div class="section-title">Продажи</div>
+                    <div class="project">
+                        <div class="project-details">
+                            <p><span class="checkmark">✔</span>Встречи с А. Андросовым: 2 (Югов Е., Аминев П.)</p>
+                            <p><span class="checkmark">✔</span>Онбординг: 1 (Брудник А.)</p>
+                            <p><span class="crossmark">✖</span>На этапе оформления и оплаты: 0</p>
+                            <p><span class="crossmark">✖</span>Новые резиденты: 0</p>
+                        </div>
+                    </div>
+
+                    <div class="section-title">Продления</div>
+                    <div class="project">
+                        <div class="project-details">
+                            <p><span class="bullet">•</span>На продлении: 4 (Шашков А., Гиря В., Бартюк Т., Радионов А.)</p>
+                            <p><span class="bullet">•</span>Ожидание оплаты: 3 (Гасанов М., Лоскутов В., Колесник С.)</p>
+                            <p><span class="crossmark">✖</span>Оплатили продление: 0</p>
+                            <p><span class="crossmark">✖</span>Не продлились: Касымгалиев А., Ладнюк Д.</p>
+                        </div>
+                    </div>
+
+                    <div class="section-title">Продвижение</div>
+                    
+                    <div class="project">
+                        <div class="project-name">Заявки</div>
+                        <div class="project-details">
+                            <p><span class="bullet">•</span>С сайта — 2 (проект, запрос в Тюмень: Евгений Чирка)</p>
+                            <p><span class="bullet">•</span>Боты — 1 (проект)</p>
+                            <p><span class="bullet">•</span>Телеграм-канал — 3 (2 Тюмень, 1 фонд)</p>
+                        </div>
+                    </div>
+
+                    <div class="project">
+                        <div class="project-name">Мероприятия</div>
+                        <div class="project-details">
+                            <p><span class="bullet">•</span>Выступление Всеволода в Атлантах (24 сент) — 2 контакта</p>
+                            <p><span class="bullet">•</span>Бизнес-завтрак с Алексеем Шмоновым (28 сент) — 1 контакт</p>
+                            <p><span class="bullet">•</span>Выступления Артема в Уфе — 2 контакта</p>
+                            <p><span class="bullet">•</span>Тюмень — +2 участника, 3 уточняют детали</p>
+                        </div>
+                    </div>
+
+                    <div class="project">
+                        <div class="project-name">Контент-план на неделю</div>
+                        <div class="project-details">
+                            <p><span class="bullet">•</span><strong>понедельник</strong> — знакомство с Всеволодом Баевым</p>
+                            <p><span class="bullet">•</span><strong>среда</strong> — дайджест 1 октября (онлайн + Тюмень)</p>
+                            <p><span class="bullet">•</span><strong>четверг</strong> — Soluxe SPA</p>
+                            <p><span class="bullet">•</span><strong>воскресенье</strong> — «Путь инвестора»: Владимир Лоскутов</p>
+                        </div>
+                    </div>
+
+                    <div class="project">
+                        <div class="project-name">SMM</div>
+                        <div class="project-details">
+                            <p><strong>Телеграм:</strong></p>
+                            <p><span class="bullet">•</span>2 поста</p>
+                            <p><span class="bullet">•</span>+7 подписчиков (547)</p>
+                            <p><span class="bullet">•</span>Охват — 187 просмотров постов, 144 просмотра сторис</p>
+                            <p style="margin-top: 12px;"><strong>Инстаграм:</strong></p>
+                            <p><span class="bullet">•</span>2 поста</p>
+                            <p><span class="bullet">•</span>843 подписчика</p>
+                            <p><span class="bullet">•</span>Охват — 4567 просмотров (80% не подписчики), 1366 аккаунтов</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Инвест блок -->
+                <div class="block invest-block">
+                    <div class="block-header">
+                        <div class="block-icon invest-icon">
+                            <svg width="28" height="28" fill="white" viewBox="0 0 24 24">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="9" y1="9" x2="9" y2="15"/>
+                                <line x1="15" y1="9" x2="15" y2="15"/>
+                                <line x1="9" y1="12" x2="15" y2="12"/>
+                                <path d="M12 2v2"/>
+                                <path d="M12 20v2"/>
+                            </svg>
+                        </div>
+                        <div class="block-title">Проектный офис</div>
+                    </div>
+
+                    <div class="section-title invest-section-title">Проекты</div>
+
+                    <div class="project invest-card">
+                        <div class="project-name">iMoped</div>
+                        <div class="project-details">
+                            <p><strong>Статус:</strong> создание доп. структуры к юридическому лицу</p>
+                            <ul>
+                                <li>Открытие р/с</li>
+                                <li>Создание печати</li>
+                                <li>Выпуск ЭЦП</li>
+                            </ul>
+                            <p style="margin-top: 12px;"><strong>Выполненные задачи:</strong></p>
+                            <p><span class="checkmark">✔</span>Создано АО</p>
+                        </div>
+                    </div>
+
+                    <div class="project invest-card">
+                        <div class="project-name">Spa Solux</div>
+                        <div class="project-details">
+                            <p><strong>Статус:</strong> создание доп. структуры к юридическому лицу</p>
+                            <ul>
+                                <li>Открытие р/с</li>
+                                <li>Создание печати</li>
+                                <li>Выпуск ЭЦП</li>
+                            </ul>
+                            <p style="margin-top: 12px;"><strong>Выполненные задачи:</strong></p>
+                            <p><span class="checkmark">✔</span>Подготовлены материалы для Инвест-комитета: составлены аналитические справки и презентация для принятия решений</p>
+                            <p><span class="checkmark">✔</span>Проведен анализ опыта других компаний по работе по этим ОКВЭДам для работы без НДС</p>
+                            <p><span class="checkmark">✔</span>Создано АО</p>
+                        </div>
+                    </div>
+
+                    <div class="project invest-card">
+                        <div class="project-name">Тамбов</div>
+                        <div class="project-details">
+                            <p><strong>Статус:</strong> составление мемо</p>
+                            <ul>
+                                <li>Проанализирован рынок аренды зданий и офисных помещений в Тамбове</li>
+                                <li>Составлена финмодель проекта</li>
+                                <li>Рассчитана дополнительная доходность относительно увеличенной арендной ставки</li>
+                                <li>Подготовлен слайд для ИК</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="project invest-card">
+                        <div class="project-name">Лофт 228</div>
+                        <div class="project-details">
+                            <p><strong>Статус:</strong> составление документов по залогу</p>
+                            <ul>
+                                <li>Проанализированы варианты залога, найден оптимальный вариант</li>
+                                <li>Подготовлены материалы для Инвест-комитета: составлены аналитические справки и презентация для принятия решений</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="project invest-card">
+                        <div class="project-name">Новая Басманная 19с2</div>
+                        <div class="project-details">
+                            <p><strong>Статус:</strong> составление мемо</p>
+                            <ul>
+                                <li>Подготовлены материалы для Инвест-комитета: составлены аналитические справки и презентация для принятия решений</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="section-title invest-section-title">ВИ</div>
+
+                    <div class="project invest-card">
+                        <div class="project-name">Е. Ларионов</div>
+                        <div class="project-details">
+                            <p><span class="invest-bullet">•</span>Дашкиев — 22.09 документы отправлены в АТОН, ожидается ответ от комплаенс</p>
+                            <p><span class="invest-bullet">•</span>Калашников — 15.09 документы отправлены в АТОН, комплаенс запросил отчетность по доходу в другом виде. Ожидается ответ со стороны бухгалтерии А. Калашникова</p>
+                            <p><span class="invest-bullet">•</span>Блонский — 15.09 документы отправлены в АТОН, комплаенс запросил дополнительные документы по подтверждению дохода</p>
+                        </div>
+                    </div>
+
+                    <div class="project invest-card">
+                        <div class="project-name">Е. Лашков</div>
+                        <div class="project-details">
+                            <p><span class="invest-bullet">•</span>Цибизов С. — ожидается декларация (акции будут переставлены со счета Е. Ларионова)</p>
+                            <p><span class="invest-bullet">•</span>Зигангиров Л. — ожидается декларация</p>
+                            <p><span class="invest-bullet">•</span>Хилков В. — 18.09 документы направлены в АТОН, ожидается ответ комплаенс (акции будут переставлены со счета Е. Ларионова)</p>
+                        </div>
+                    </div>
+
+                    <div class="project invest-card">
+                        <div class="project-name">В. Баев</div>
+                        <div class="project-details">
+                            <p><span class="invest-bullet">•</span>Тищенко — 05.09 документы отправлены в АТОН, ожидается ответ по перестановке</p>
+                            <p><span class="invest-bullet">•</span>Хайкин — ДКП подписан, передан в АТОН, контроль перестановки через П. Гнибиду</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Финансовый блок -->
+                <div class="block finance-block">
+                    <div class="block-header">
+                        <div class="block-icon finance-icon">
+                            <svg width="28" height="28" fill="white" viewBox="0 0 24 24">
+                                <rect x="4" y="4" width="16" height="16" rx="2"/>
+                                <circle cx="8" cy="8" r="1"/>
+                                <circle cx="12" cy="8" r="1"/>
+                                <circle cx="16" cy="8" r="1"/>
+                                <circle cx="8" cy="12" r="1"/>
+                                <circle cx="12" cy="12" r="1"/>
+                                <circle cx="16" cy="12" r="1"/>
+                                <circle cx="8" cy="16" r="1"/>
+                                <rect x="12" y="15" width="4" height="2" rx="1"/>
+                            </svg>
+                        </div>
+                        <div class="block-title">Итоги недели: финансовый результат</div>
+                    </div>
+                    
+                    <div class="section-title finance-section-title">Поступления: 534 989 руб</div>
+                    
+                    <div class="finance-summary">
+                        <div class="finance-item">
+                            <h4><span class="crossmark">✖</span>Продажа</h4>
+                            <div class="amount-large">0 ₽</div>
+                        </div>
+                        <div class="finance-item">
+                            <h4><span class="crossmark">✖</span>Продление</h4>
+                            <div class="amount-large">0 ₽</div>
+                        </div>
+                        <div class="finance-item">
+                            <h4><span class="checkmark">✔</span>Комиссия</h4>
+                            <div class="amount-large amount-success">104 989 ₽</div>
+                            <p style="color: #64748b; font-size: 0.9rem;">Intellion</p>
+                        </div>
+                        <div class="finance-item">
+                            <h4><span class="checkmark">✔</span>Прочие услуги</h4>
+                            <div class="amount-large amount-success">50 000 ₽</div>
+                            <p style="color: #64748b; font-size: 0.9rem;">карта АТЭС</p>
+                        </div>
+                        <div class="finance-item">
+                            <h4><span class="checkmark">✔</span>Мероприятие в Тюмени</h4>
+                            <div class="amount-large amount-success">380 000 ₽</div>
+                            <p style="color: #64748b; font-size: 0.9rem;">5 человек</p>
+                        </div>
+                        <div class="finance-item">
+                            <h4><span class="crossmark">✖</span>Мероприятие в Дубае</h4>
+                            <div class="amount-large">$0</div>
+                        </div>
+                    </div>
+
+                    <div class="section-title finance-section-title">Расходы операционные: 1 168 514 руб</div>
+                    <div class="project finance-card">
+                        <div class="project-details">
+                            <p><span class="finance-bullet">•</span><strong>ФОТ команды:</strong> 40 020 ₽</p>
+                            <p><span class="finance-bullet">•</span><strong>Налоги:</strong> 44 941 ₽</p>
+                            <p><span class="finance-bullet">•</span><strong>Расходы на вход в проекты:</strong> 122 500 ₽ (АО Спа Солюкс)</p>
+                            <p><span class="finance-bullet">•</span><strong>Производственные расходы:</strong> 6 360 ₽</p>
+                            <p><span class="finance-bullet">•</span><strong>Организация мероприятий:</strong> 906 600 ₽</p>
+                            <p><span class="finance-bullet">•</span><strong>Коммерческие расходы:</strong> 33 000 ₽</p>
+                            <p><span class="finance-bullet">•</span><strong>Административные расходы:</strong> 15 093 ₽</p>
+                        </div>
+                    </div>
+                    
+                    <div class="finance-summary">
+                        <div class="finance-item">
+                            <h4><span class="crossmark">✖</span>Чистый денежный поток</h4>
+                            <div class="amount-large amount-danger">-633 525 ₽</div>
+                        </div>
+                        <div class="finance-item">
+                            <h4><span class="checkmark">✔</span>Остаток денег</h4>
+                            <div class="amount-large">4 899 970 ₽</div>
+                            <p style="color: #64748b; font-size: 0.9rem;">в т.ч. на р/с — 2 368 583 ₽</p>
+                        </div>
+                    </div>
+                    
+                    <div class="warning-section">
+                        <h4 style="margin-bottom: 16px; color: #0f172a;">Предупреждение</h4>
+                        <p><span class="warning-bullet">‼</span>Не получен очередной платеж согласно графику рассрочки за членство в фонде от Ильи Шурыгина (187 500 руб). Платеж ожидается 01.10.2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
